@@ -185,19 +185,19 @@ print(num_linhas)
 # 
 # Você pode utilizar quantas células achar necessário para realizar a tarefa (use o menu "Insert"). Inclua comentátios para explicar o que você está fazendo.
 
-# In[9]:
+# In[68]:
 
 tempos = []
 dados = []
 arquivo = open('dados.csv')
 for linha in arquivo:
     blocos = linha.split(',')
-    tempos.append(blocos[0])
-    dados.append(blocos[1])
+    tempos.append(float(blocos[0]))
+    dados.append(float(blocos[1]))
 print("tempos", tempos)
 print("dados", dados)
 arquivo.close()
-
+get_ipython().magic('matplotlib inline')
 import matplotlib.pyplot as plt 
 x = tempos
 y = dados
@@ -205,9 +205,6 @@ plt.figure()
 plt.plot(x, y, "-k")
 plt.xlabel("Hora")
 plt.ylabel("Temperatura")
-plt.savefig("fig/grafico-horaxtemp.png")
-plt.show()
-plt.close()
 
 
 # ### Resultado esperado
@@ -221,7 +218,7 @@ plt.close()
 #     Tempos: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, ...]
 #     Dados: [0.0, 0.61464164, 1.0320324, 1.1238251, 0.87540985, 0.39101585, -0.14270041, ...]
 
-# In[ ]:
+# In[10]:
 
 print("Tempos:", tempos)
 print("Dados:", dados)
@@ -242,9 +239,14 @@ print("Dados:", dados)
 # 
 # **Dica**: Para elevar um número a uma potência, utilize `**`. Por exemplo, `2**4 == 16`.
 
-# In[ ]:
+# In[69]:
 
-
+N = len(dados)
+media = 0
+for temp in dados:
+    media = media + temp
+media = media / N
+print("Média=", media)
 
 
 # ### Resultado esperado
@@ -252,7 +254,7 @@ print("Dados:", dados)
 # As celúlas abaixo comparam a sua média e desvio padrão com os calculados pela biblioteca [numpy](http://numpy.org/).
 # Ambas devem imprimir `True` quando executadas.
 
-# In[ ]:
+# In[70]:
 
 import numpy as np
 print("Media esta igual?", np.allclose(media, np.mean(dados)))
